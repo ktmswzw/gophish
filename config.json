@@ -1,6 +1,6 @@
 {
 	"admin_server": {
-		"listen_url": "127.0.0.1:3333",
+		"listen_url": "0.0.0.0:3333",
 		"use_tls": true,
 		"cert_path": "./cert/api.xnewshop.com.crt",
 		"key_path": "./cert/api.xnewshop.com.key"
