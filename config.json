@@ -6,7 +6,7 @@
 		"key_path": "./cert/api.xnewshop.com.key"
 	},
 	"phish_server": {
-		"listen_url": "0.0.0.0:80",
+		"listen_url": "0.0.0.0:3339",
 		"use_tls": false,
 		"cert_path": "./cert/1_xnewshop.com_bundle.crt",
 		"key_path": "./cert/2_xnewshop.com.key"
