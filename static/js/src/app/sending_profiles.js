@@ -105,9 +105,9 @@ var dismissSendTestEmailModal = function () {
 
 var deleteProfile = function (idx) {
     Swal.fire({
-        title: "Are you sure?",
+        title: "您确认？",
         text: "This will delete the sending profile. This can't be undone!",
-        type: "warning",
+        type: "警告",
         animation: false,
         showCancelButton: true,
         confirmButtonText: "Delete " + escapeHtml(profiles[idx].name),
@@ -130,7 +130,7 @@ var deleteProfile = function (idx) {
             Swal.fire(
                 'Sending Profile Deleted!',
                 'This sending profile has been deleted!',
-                'success'
+                '成功'
             );
         }
         $('button:contains("OK")').on('click', function () {

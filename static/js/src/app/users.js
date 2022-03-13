@@ -84,9 +84,9 @@ const deleteUser = (id) => {
         return
     }
     Swal.fire({
-        title: "Are you sure?",
+        title: "您确认？",
         text: "This will delete the account for " + escapeHtml(user.username) + " as well as all of the objects they have created.\n\nThis can't be undone!",
-        type: "warning",
+        type: "警告",
         animation: false,
         showCancelButton: true,
         confirmButtonText: "Delete",
@@ -112,7 +112,7 @@ const deleteUser = (id) => {
             Swal.fire(
                 'User Deleted!',
                 "The user account for " + escapeHtml(user.username) + " and all associated objects have been deleted!",
-                'success'
+                '成功'
             );
         }
         $('button:contains("OK")').on('click', function () {
@@ -127,9 +127,9 @@ const impersonate = (id) => {
         return
     }
     Swal.fire({
-        title: "Are you sure?",
+        title: "您确认？",
         html: "You will be logged out of your account and logged in as <strong>" + escapeHtml(user.username) + "</strong>",
-        type: "warning",
+        type: "警告",
         animation: false,
         showCancelButton: true,
         confirmButtonText: "Swap User",

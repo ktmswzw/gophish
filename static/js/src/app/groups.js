@@ -22,7 +22,7 @@ function save(id) {
         group.id = id
         api.groupId.put(group)
             .success(function (data) {
-                successFlash("Group updated successfully!")
+                successFlash("群组修改成功!")
                 load()
                 dismiss()
                 $("#modal").modal('hide')
@@ -35,7 +35,7 @@ function save(id) {
         // to /groups
         api.groups.post(group)
             .success(function (data) {
-                successFlash("Group added successfully!")
+                successFlash("群组添加成功!")
                 load()
                 dismiss()
                 $("#modal").modal('hide')
@@ -82,7 +82,7 @@ function edit(id) {
                 targets.DataTable().rows.add(targetRows).draw()
             })
             .error(function () {
-                errorFlash("Error fetching group")
+                errorFlash("操作失败")
             })
     }
     // Handle file uploads
@@ -97,7 +97,7 @@ function edit(id) {
             var acceptFileTypes = /(csv|txt)$/i;
             var filename = data.originalFiles[0]['name']
             if (filename && !acceptFileTypes.test(filename.split(".").pop())) {
-                modalError("Unsupported file extension (use .csv or .txt)")
+                modalError("不支持的类型 (仅 .csv or .txt)")
                 return false;
             }
             data.submit();
@@ -117,10 +117,10 @@ function edit(id) {
 
 var downloadCSVTemplate = function () {
     var csvScope = [{
-        'First Name': 'Example',
-        'Last Name': 'User',
-        'Email': 'foobar@example.com',
-        'Position': 'Systems Administrator'
+        'First Name': 'Steve',
+        'Last Name': 'Jobs',
+        'Email': 'jobs@apple.com',
+        'Position': 'CEO'
     }]
     var filename = 'group_template.csv'
     var csvString = Papa.unparse(csvScope, {})
@@ -149,9 +149,9 @@ var deleteGroup = function (id) {
         return
     }
     Swal.fire({
-        title: "Are you sure?",
-        text: "This will delete the group. This can't be undone!",
-        type: "warning",
+        title: "您确认?",
+        text: "删除群组，不可恢复!",
+        type: "警告",
         animation: false,
         showCancelButton: true,
         confirmButtonText: "Delete " + escapeHtml(group.name),
@@ -172,9 +172,9 @@ var deleteGroup = function (id) {
     }).then(function (result) {
         if (result.value){
             Swal.fire(
-                'Group Deleted!',
-                'This group has been deleted!',
-                'success'
+                '删除群组!',
+                '已删除群组!',
+                '成功'
             );
         }
         $('button:contains("OK")').on('click', function () {

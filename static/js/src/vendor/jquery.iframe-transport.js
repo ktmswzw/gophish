@@ -97,7 +97,7 @@
                                 // iframe content document as response object:
                                 completeCallback(
                                     200,
-                                    'success',
+                                    '成功',
                                     {'iframe': response}
                                 );
                                 // Fix for IE endless progress bar activity bug

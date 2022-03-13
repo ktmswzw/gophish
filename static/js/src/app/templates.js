@@ -80,9 +80,9 @@ function dismiss() {
 
 var deleteTemplate = function (idx) {
     Swal.fire({
-        title: "Are you sure?",
+        title: "您确认？",
         text: "This will delete the template. This can't be undone!",
-        type: "warning",
+        type: "警告",
         animation: false,
         showCancelButton: true,
         confirmButtonText: "Delete " + escapeHtml(templates[idx].name),
@@ -105,7 +105,7 @@ var deleteTemplate = function (idx) {
             Swal.fire(
                 'Template Deleted!',
                 'This template has been deleted!',
-                'success'
+                '成功'
             );
         }
         $('button:contains("OK")').on('click', function () {

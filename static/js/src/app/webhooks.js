@@ -107,9 +107,9 @@ const deleteWebhook = (id) => {
         return;
     }
     Swal.fire({
-        title: "Are you sure?",
+        title: "您确认？",
         text: `This will delete the webhook '${escapeHtml(wh.name)}'`,
-        type: "warning",
+        type: "警告",
         animation: false,
         showCancelButton: true,
         confirmButtonText: "Delete",

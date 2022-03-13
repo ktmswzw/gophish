@@ -14,7 +14,7 @@ var campaign = {}
 // Launch attempts to POST to /campaigns/
 function launch() {
     Swal.fire({
-        title: "Are you sure?",
+        title: "您确认？",
         text: "This will schedule the campaign to be launched.",
         type: "question",
         animation: false,
@@ -71,7 +71,7 @@ function launch() {
             Swal.fire(
                 'Campaign Scheduled!',
                 'This campaign has been scheduled for launch!',
-                'success'
+                '成功'
             );
         }
         $('button:contains("OK")').on('click', function () {
@@ -127,9 +127,9 @@ function dismiss() {
 
 function deleteCampaign(idx) {
     Swal.fire({
-        title: "Are you sure?",
+        title: "您确认？",
         text: "This will delete the campaign. This can't be undone!",
-        type: "warning",
+        type: "警告",
         animation: false,
         showCancelButton: true,
         confirmButtonText: "Delete " + campaigns[idx].name,
@@ -152,7 +152,7 @@ function deleteCampaign(idx) {
             Swal.fire(
                 'Campaign Deleted!',
                 'This campaign has been deleted!',
-                'success'
+                '成功'
             );
         }
         $('button:contains("OK")').on('click', function () {

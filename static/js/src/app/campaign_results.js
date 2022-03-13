@@ -126,9 +126,9 @@ function dismiss() {
 // Deletes a campaign after prompting the user
 function deleteCampaign() {
     Swal.fire({
-        title: "Are you sure?",
+        title: "您确认？",
         text: "This will delete the campaign. This can't be undone!",
-        type: "warning",
+        type: "警告",
         animation: false,
         showCancelButton: true,
         confirmButtonText: "Delete Campaign",
@@ -152,7 +152,7 @@ function deleteCampaign() {
             Swal.fire(
                 'Campaign Deleted!',
                 'This campaign has been deleted!',
-                'success'
+                '成功'
             );
         }
         $('button:contains("OK")').on('click', function () {
@@ -164,9 +164,9 @@ function deleteCampaign() {
 // Completes a campaign after prompting the user
 function completeCampaign() {
     Swal.fire({
-        title: "Are you sure?",
+        title: "您确认？",
         text: "Gophish will stop processing events for this campaign",
-        type: "warning",
+        type: "警告",
         animation: false,
         showCancelButton: true,
         confirmButtonText: "Complete Campaign",
@@ -190,7 +190,7 @@ function completeCampaign() {
             Swal.fire(
                 'Campaign Completed!',
                 'This campaign has been completed!',
-                'success'
+                '成功'
             );
             $('#complete_button')[0].disabled = true;
             $('#complete_button').text('Completed!')
@@ -920,7 +920,7 @@ function refresh() {
 
 function report_mail(rid, cid) {
     Swal.fire({
-        title: "Are you sure?",
+        title: "您确认？",
         text: "This result will be flagged as reported (RID: " + rid + ")",
         type: "question",
         animation: false,
