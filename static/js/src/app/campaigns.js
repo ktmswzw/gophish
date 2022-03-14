@@ -15,11 +15,11 @@ var campaign = {}
 function launch() {
     Swal.fire({
         title: "您确认？",
-        text: "This will schedule the campaign to be launched.",
+        text: "即将开启活动发送",
         type: "question",
         animation: false,
         showCancelButton: true,
-        confirmButtonText: "Launch",
+        confirmButtonText: "开始",
         confirmButtonColor: "#428bca",
         reverseButtons: true,
         allowOutsideClick: false,
@@ -35,7 +35,7 @@ function launch() {
                 // Validate our fields
                 var send_by_date = $("#send_by_date").val()
                 if (send_by_date != "") {
-                    send_by_date = moment(send_by_date, "MMMM Do YYYY, h:mm a").utc().format()
+                    send_by_date = moment(send_by_date, "YYYY-MM-DD, h:mm a").utc().format()
                 }
                 campaign = {
                     name: $("#name").val(),
@@ -49,7 +49,7 @@ function launch() {
                     smtp: {
                         name: $("#profile").select2("data")[0].text
                     },
-                    launch_date: moment($("#launch_date").val(), "MMMM Do YYYY, h:mm a").utc().format(),
+                    launch_date: moment($("#launch_date").val(), "YYYY-MM-DD, h:mm a").utc().format(),
                     send_by_date: send_by_date || null,
                     groups: groups,
                 }
@@ -295,7 +295,7 @@ $(document).ready(function () {
         },
         "showTodayButton": true,
         "defaultDate": moment(),
-        "format": "MMMM Do YYYY, h:mm a"
+        "format": "YYYY-MM-DD, h:mm a"
     })
     $("#send_by_date").datetimepicker({
         "widgetPositioning": {
@@ -303,7 +303,7 @@ $(document).ready(function () {
         },
         "showTodayButton": true,
         "useCurrent": false,
-        "format": "MMMM Do YYYY, h:mm a"
+        "format": "YYYY-MM-DD, h:mm a"
     })
     // Setup multiple modals
     // Code based on http://miles-by-motorcycle.com/static/bootstrap-modal/index.html
@@ -371,16 +371,17 @@ $(document).ready(function () {
                     //section for tooltips on the status of a campaign to show some quick stats
                     var launchDate;
                     if (moment(campaign.launch_date).isAfter(moment())) {
-                        launchDate = "Scheduled to start: " + moment(campaign.launch_date).format('MMMM Do YYYY, h:mm:ss a')
+                        launchDate = "Scheduled to start: " + moment(campaign.launch_date).format('YYYY-MM-DD, h:mm:ss a')
                         var quickStats = launchDate + "<br><br>" + "Number of recipients: " + campaign.stats.total
                     } else {
-                        launchDate = "Launch Date: " + moment(campaign.launch_date).format('MMMM Do YYYY, h:mm:ss a')
+                        launchDate = "Launch Date: " + moment(campaign.launch_date).format('YYYY-MM-DD, h:mm:ss a')
                         var quickStats = launchDate + "<br><br>" + "Number of recipients: " + campaign.stats.total + "<br><br>" + "Emails opened: " + campaign.stats.opened + "<br><br>" + "Emails clicked: " + campaign.stats.clicked + "<br><br>" + "Submitted Credentials: " + campaign.stats.submitted_data + "<br><br>" + "Errors : " + campaign.stats.error + "<br><br>" + "Reported : " + campaign.stats.email_reported
                     }
 
                     var row = [
                         escapeHtml(campaign.name),
-                        moment(campaign.created_date).format('MMMM Do YYYY, h:mm:ss a'),
+                        moment(campaign.created_date).format('YYYY-MM-DD, h:mm:ss a'),
+                        moment(campaign.launch_date).format('YYYY-MM-DD, h:mm:ss a'),
                         "<span class=\"label " + label + "\" data-toggle=\"tooltip\" data-placement=\"right\" data-html=\"true\" title=\"" + quickStats + "\">" + campaign.status + "</span>",
                         "<div class='pull-right'><a class='btn btn-primary' href='/campaigns/" + campaign.id + "' data-toggle='tooltip' data-placement='left' title='View Results'>\
                     <i class='fa fa-bar-chart'></i>\

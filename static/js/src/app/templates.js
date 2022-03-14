@@ -322,7 +322,7 @@ function load() {
                 $.each(templates, function (i, template) {
                     templateRows.push([
                         escapeHtml(template.name),
-                        moment(template.modified_date).format('MMMM Do YYYY, h:mm:ss a'),
+                        moment(template.modified_date).format('YYYY-MM-DD, h:mm:ss a'),
                         "<div class='pull-right'><span data-toggle='modal' data-backdrop='static' data-target='#modal'><button class='btn btn-primary' data-toggle='tooltip' data-placement='left' title='Edit Template' onclick='edit(" + i + ")'>\
                     <i class='fa fa-pencil'></i>\
                     </button></span>\

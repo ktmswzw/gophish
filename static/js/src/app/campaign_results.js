@@ -389,7 +389,7 @@ function renderTimeline(data) {
                 '    <div class="timeline-icon ' + statuses[event.message].label + '">' +
                 '    <i class="fa ' + statuses[event.message].icon + '"></i></div>' +
                 '    <div class="timeline-message">' + escapeHtml(event.message) +
-                '    <span class="timeline-date">' + moment.utc(event.time).local().format('MMMM Do YYYY h:mm:ss a') + '</span>'
+                '    <span class="timeline-date">' + moment.utc(event.time).local().format('YYYY-MM-DD h:mm:ss a') + '</span>'
             if (event.details) {
                 details = JSON.parse(event.details)
                 if (event.message == "Clicked Link" || event.message == "Submitted Data") {
@@ -697,7 +697,7 @@ function poll() {
                 var rid = rowData[0]
                 $.each(campaign.results, function (j, result) {
                     if (result.id == rid) {
-                        rowData[8] = moment(result.send_date).format('MMMM Do YYYY, h:mm:ss a')
+                        rowData[8] = moment(result.send_date).format('YYYY-MM-DD, h:mm:ss a')
                         rowData[7] = result.reported
                         rowData[6] = result.status
                         resultsTable.row(i).data(rowData)
@@ -803,7 +803,7 @@ function load() {
                         escapeHtml(result.position) || "",
                         result.status,
                         result.reported,
-                        moment(result.send_date).format('MMMM Do YYYY, h:mm:ss a')
+                        moment(result.send_date).format('YYYY-MM-DD, h:mm:ss a')
                     ])
                     email_series_data[result.status]++;
                     if (result.reported) {

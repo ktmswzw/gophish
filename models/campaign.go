@@ -448,7 +448,7 @@ func GetQueuedCampaigns(t time.Time) ([]Campaign, error) {
 	return cs, err
 }
 
-// PostCampaign inserts a campaign and all associated records into the database.
+// postcampaign inserts a campaign and all associated records into the database.
 func PostCampaign(c *Campaign, uid int64) error {
 	err := c.Validate()
 	if err != nil {

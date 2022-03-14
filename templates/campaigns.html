@@ -36,10 +36,11 @@
                 <table id="campaignTable" class="table" style="display:none;">
                     <thead>
                         <tr>
-                            <th class="col-md-3">名称</th>
-                            <th class="col-md-4">创建日期</th>
+                            <th class="col-md-2">名称</th>
+                            <th class="col-md-3">创建日期</th>
+                            <th class="col-md-3">触发时间</th>
                             <th class="col-md-2">状态</th>
-                            <th class="col-md-3 no-sort"></th>
+                            <th class="col-md-2 no-sort">操作</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,10 +60,11 @@
                 <table id="campaignTableArchive" class="table" style="display:none;">
                     <thead>
                         <tr>
-                            <th class="col-md-3">名称</th>
-                            <th class="col-md-4">创建日期</th>
+                            <th class="col-md-2">名称</th>
+                            <th class="col-md-3">创建日期</th>
+                            <th class="col-md-3">触发时间</th>
                             <th class="col-md-2">状态</th>
-                            <th class="col-md-3 no-sort"></th>
+                            <th class="col-md-2 no-sort">操作</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -175,5 +177,5 @@
     </div>
 </div>
 {{end}} {{define "scripts"}}
-<script src="/js/dist/app/campaigns.min.js"></script>
+<script src="/js/src/app/campaigns.js"></script>
 {{end}}
