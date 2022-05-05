@@ -165,7 +165,7 @@ function setupOptions() {
     api.groups.summary()
         .success(function (summaries) {
             groups = summaries.groups
-            if (groups.length == 0) {
+            if (groups.length === 0) {
                 modalError("No groups found!")
                 return false;
             } else {
@@ -183,7 +183,7 @@ function setupOptions() {
         });
     api.templates.get()
         .success(function (templates) {
-            if (templates.length == 0) {
+            if (templates.length === 0) {
                 modalError("No templates found!")
                 return false
             } else {
@@ -204,7 +204,7 @@ function setupOptions() {
         });
     api.pages.get()
         .success(function (pages) {
-            if (pages.length == 0) {
+            if (pages.length === 0) {
                 modalError("No pages found!")
                 return false
             } else {
@@ -225,7 +225,7 @@ function setupOptions() {
         });
     api.SMTP.get()
         .success(function (profiles) {
-            if (profiles.length == 0) {
+            if (profiles.length === 0) {
                 modalError("No profiles found!")
                 return false
             } else {
@@ -371,11 +371,11 @@ $(document).ready(function () {
                     //section for tooltips on the status of a campaign to show some quick stats
                     var launchDate;
                     if (moment(campaign.launch_date).isAfter(moment())) {
-                        launchDate = "Scheduled to start: " + moment(campaign.launch_date).format('YYYY-MM-DD, h:mm:ss a')
-                        var quickStats = launchDate + "<br><br>" + "Number of recipients: " + campaign.stats.total
+                        launchDate = "计划开始于: " + moment(campaign.launch_date).format('YYYY-MM-DD, h:mm:ss a')
+                        var quickStats = launchDate + "<br><br>" + "收件人数: " + campaign.stats.total
                     } else {
-                        launchDate = "Launch Date: " + moment(campaign.launch_date).format('YYYY-MM-DD, h:mm:ss a')
-                        var quickStats = launchDate + "<br><br>" + "Number of recipients: " + campaign.stats.total + "<br><br>" + "Emails opened: " + campaign.stats.opened + "<br><br>" + "Emails clicked: " + campaign.stats.clicked + "<br><br>" + "Submitted Credentials: " + campaign.stats.submitted_data + "<br><br>" + "Errors : " + campaign.stats.error + "<br><br>" + "Reported : " + campaign.stats.email_reported
+                        launchDate = "开始时间: " + moment(campaign.launch_date).format('YYYY-MM-DD, h:mm:ss a')
+                        var quickStats = launchDate + "<br><br>" + "收件人数: " + campaign.stats.total + "<br><br>" + "邮件被打开: " + campaign.stats.opened + "<br><br>" + "点击: " + campaign.stats.clicked + "<br><br>" + "提交的凭证: " + campaign.stats.submitted_data + "<br><br>" + "错误数 : " + campaign.stats.error + "<br><br>" + "报告反馈 : " + campaign.stats.email_reported
                     }
 
                     var row = [

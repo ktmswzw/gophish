@@ -3,80 +3,95 @@ var campaigns = []
 var statuses = {
     "Email Sent": {
         color: "#1abc9c",
+        text: "邮件发送",
         label: "label-success",
         icon: "fa-envelope",
         point: "ct-point-sent"
     },
     "Emails Sent": {
         color: "#1abc9c",
+        text: "邮件发送",
         label: "label-success",
         icon: "fa-envelope",
         point: "ct-point-sent"
     },
     "In progress": {
+        text: "进行中",
         label: "label-primary"
     },
     "Queued": {
+        text: "队列中",
         label: "label-info"
     },
     "Completed": {
+        text: "完成",
         label: "label-success"
     },
     "Email Opened": {
+        text: "打开邮件",
         color: "#f9bf3b",
         label: "label-warning",
         icon: "fa-envelope",
         point: "ct-point-opened"
     },
     "Email Reported": {
+        text: "邮件反馈",
         color: "#45d6ef",
         label: "label-warning",
         icon: "fa-bullhorne",
         point: "ct-point-reported"
     },
     "Clicked Link": {
+        text: "点击链接",
         color: "#F39C12",
         label: "label-clicked",
         icon: "fa-mouse-pointer",
         point: "ct-point-clicked"
     },
     "Success": {
+        text: "成功",
         color: "#f05b4f",
         label: "label-danger",
         icon: "fa-exclamation",
         point: "ct-point-clicked"
     },
     "Error": {
+        text: "错误",
         color: "#6c7a89",
         label: "label-default",
         icon: "fa-times",
         point: "ct-point-error"
     },
     "Error Sending Email": {
+        text: "发送错误",
         color: "#6c7a89",
         label: "label-default",
         icon: "fa-times",
         point: "ct-point-error"
     },
     "Submitted Data": {
+        text: "提交数据",
         color: "#f05b4f",
         label: "label-danger",
         icon: "fa-exclamation",
         point: "ct-point-clicked"
     },
     "Unknown": {
+        text: "未知",
         color: "#6c7a89",
         label: "label-default",
         icon: "fa-question",
         point: "ct-point-error"
     },
     "Sending": {
+        text: "发送中",
         color: "#428bca",
         label: "label-primary",
         icon: "fa-spinner",
         point: "ct-point-sending"
     },
     "Campaign Created": {
+        text: "活动创建",
         label: "label-success",
         icon: "fa-rocket"
     }
@@ -193,7 +208,7 @@ function generateStatsPieCharts(campaigns) {
         })
         var stats_chart = renderPieChart({
             elemId: status + '_chart',
-            title: status_label,
+            title: statuses[status_label].text,
             name: status,
             data: stats_data,
             colors: [statuses[status_label].color, "#dddddd"]
@@ -226,7 +241,7 @@ function generateTimelineChart(campaigns) {
             type: 'areaspline'
         },
         title: {
-            text: 'Phishing Success Overview'
+            text: '执行总览'
         },
         xAxis: {
             type: 'datetime',
@@ -243,7 +258,7 @@ function generateTimelineChart(campaigns) {
             min: 0,
             max: 100,
             title: {
-                text: "% of Success"
+                text: "% of 成功率"
             }
         },
         tooltip: {
@@ -298,9 +313,9 @@ $(document).ready(function () {
                 // Create the overview chart data
                 campaignTable = $("#campaignTable").DataTable({
                     columnDefs: [{
-                            orderable: false,
-                            targets: "no-sort"
-                        },
+                        orderable: false,
+                        targets: "no-sort"
+                    },
                         {
                             className: "color-sent",
                             targets: [2]
@@ -332,11 +347,12 @@ $(document).ready(function () {
                     var label = statuses[campaign.status].label || "label-default";
                     //section for tooltips on the status of a campaign to show some quick stats
                     var launchDate;
+                    console.log(statuses[campaign.status].text)
                     if (moment(campaign.launch_date).isAfter(moment())) {
-                        launchDate = "Scheduled to start: " + moment(campaign.launch_date).format('YYYY-MM-DD, h:mm:ss a')
+                        launchDate = "预定开始于: " + moment(campaign.launch_date).format('YYYY-MM-DD, h:mm:ss a')
                         var quickStats = launchDate + "<br><br>" + "Number of recipients: " + campaign.stats.total
                     } else {
-                        launchDate = "Launch Date: " + moment(campaign.launch_date).format('YYYY-MM-DD, h:mm:ss a')
+                        launchDate = "开始日期时间: " + moment(campaign.launch_date).format('YYYY-MM-DD, h:mm:ss a')
                         var quickStats = launchDate + "<br><br>" + "Number of recipients: " + campaign.stats.total + "<br><br>" + "Emails opened: " + campaign.stats.opened + "<br><br>" + "Emails clicked: " + campaign.stats.clicked + "<br><br>" + "Submitted Credentials: " + campaign.stats.submitted_data + "<br><br>" + "Errors : " + campaign.stats.error + "<br><br>" + "Reported : " + campaign.stats.email_reported
                     }
                     // Add it to the list
@@ -348,11 +364,11 @@ $(document).ready(function () {
                         campaign.stats.clicked,
                         campaign.stats.submitted_data,
                         campaign.stats.email_reported,
-                        "<span class=\"label " + label + "\" data-toggle=\"tooltip\" data-placement=\"right\" data-html=\"true\" title=\"" + quickStats + "\">" + campaign.status + "</span>",
-                        "<div class='pull-right'><a class='btn btn-primary' href='/campaigns/" + campaign.id + "' data-toggle='tooltip' data-placement='left' title='View Results'>\
+                        "<span class=\"label " + label + "\" data-toggle=\"tooltip\" data-placement=\"right\" data-html=\"true\" title=\"" + quickStats + "\">" + statuses[campaign.status].text + "</span>",
+                        "<div class='pull-right'><a class='btn btn-primary' href='/campaigns/" + campaign.id + "' data-toggle='tooltip' data-placement='left' title='查看结果'>\
                     <i class='fa fa-bar-chart'></i>\
                     </a>\
-                    <button class='btn btn-danger' onclick='deleteCampaign(" + i + ")' data-toggle='tooltip' data-placement='left' title='Delete Campaign'>\
+                    <button class='btn btn-danger' onclick='deleteCampaign(" + i + ")' data-toggle='tooltip' data-placement='left' title='删除活动'>\
                     <i class='fa fa-trash-o'></i>\
                     </button></div>"
                     ])
@@ -367,6 +383,6 @@ $(document).ready(function () {
             }
         })
         .error(function () {
-            errorFlash("Error fetching campaigns")
+            errorFlash("获取活动失败")
         })
 })
