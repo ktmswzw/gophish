@@ -26,6 +26,7 @@ function launch() {
         type: "question",
         animation: false,
         showCancelButton: true,
+        cancelButtonText: "取消",
         confirmButtonText: "开始",
         confirmButtonColor: "#428bca",
         reverseButtons: true,
@@ -135,11 +136,12 @@ function dismiss() {
 function deleteCampaign(idx) {
     Swal.fire({
         title: "您确认？",
-        text: "This will delete the campaign. This can't be undone!",
+        text: "将删除活动，不可撤销!",
         type: "警告",
         animation: false,
         showCancelButton: true,
-        confirmButtonText: "Delete " + campaigns[idx].name,
+        cancelButtonText: "取消",
+        confirmButtonText: "删除 " + campaigns[idx].name,
         confirmButtonColor: "#428bca",
         reverseButtons: true,
         allowOutsideClick: false,

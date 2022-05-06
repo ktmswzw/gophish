@@ -15,17 +15,17 @@ import (
 )
 
 // ErrUsernameTaken is thrown when a user attempts to register a username that is taken.
-var ErrUsernameTaken = errors.New("Username already taken")
+var ErrUsernameTaken = errors.New("帐号名已注册")
 
 // ErrEmptyUsername is thrown when a user attempts to register a username that is taken.
-var ErrEmptyUsername = errors.New("No username provided")
+var ErrEmptyUsername = errors.New("没有提供帐号名")
 
 // ErrEmptyRole is throws when no role is provided when creating or modifying a user.
-var ErrEmptyRole = errors.New("No role specified")
+var ErrEmptyRole = errors.New("没有指定的角色")
 
 // ErrInsufficientPermission is thrown when a user attempts to change an
 // attribute (such as the role) for which they don't have permission.
-var ErrInsufficientPermission = errors.New("Permission denied")
+var ErrInsufficientPermission = errors.New("没有权限, 拒绝访问")
 
 // userRequest is the payload which represents the creation of a new user.
 type userRequest struct {
@@ -140,7 +140,7 @@ func (as *Server) User(w http.ResponseWriter, r *http.Request) {
 	}
 	existingUser, err := models.GetUser(id)
 	if err != nil {
-		JSONResponse(w, models.Response{Success: false, Message: "User not found"}, http.StatusNotFound)
+		JSONResponse(w, models.Response{Success: false, Message: "帐号没有找到"}, http.StatusNotFound)
 		return
 	}
 	switch {
@@ -152,8 +152,8 @@ func (as *Server) User(w http.ResponseWriter, r *http.Request) {
 			JSONResponse(w, models.Response{Success: false, Message: err.Error()}, http.StatusInternalServerError)
 			return
 		}
-		log.Infof("Deleted user account for %s", existingUser.Username)
-		JSONResponse(w, models.Response{Success: true, Message: "User deleted Successfully!"}, http.StatusOK)
+		log.Infof("已删除的用户帐号 %s", existingUser.Username)
+		JSONResponse(w, models.Response{Success: true, Message: "用户删除成功!"}, http.StatusOK)
 	case r.Method == "PUT":
 		ur := &userRequest{}
 		err = json.NewDecoder(r.Body).Decode(ur)

@@ -47,7 +47,7 @@ func (as *Server) IMAPServer(w http.ResponseWriter, r *http.Request) {
 		im := models.IMAP{}
 		err := json.NewDecoder(r.Body).Decode(&im)
 		if err != nil {
-			JSONResponse(w, models.Response{Success: false, Message: "Invalid data. Please check your IMAP settings."}, http.StatusBadRequest)
+			JSONResponse(w, models.Response{Success: false, Message: "无效的数据, 请检查您的IMAP设置."}, http.StatusBadRequest)
 			return
 		}
 		im.ModifiedDate = time.Now().UTC()
@@ -57,6 +57,6 @@ func (as *Server) IMAPServer(w http.ResponseWriter, r *http.Request) {
 			JSONResponse(w, models.Response{Success: false, Message: err.Error()}, http.StatusInternalServerError)
 			return
 		}
-		JSONResponse(w, models.Response{Success: true, Message: "Successfully saved IMAP settings."}, http.StatusCreated)
+		JSONResponse(w, models.Response{Success: true, Message: "IMAP设置成功保存."}, http.StatusCreated)
 	}
 }

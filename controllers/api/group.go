@@ -20,7 +20,7 @@ func (as *Server) Groups(w http.ResponseWriter, r *http.Request) {
 	case r.Method == "GET":
 		gs, err := models.GetGroups(ctx.Get(r, "user_id").(int64))
 		if err != nil {
-			JSONResponse(w, models.Response{Success: false, Message: "No groups found"}, http.StatusNotFound)
+			JSONResponse(w, models.Response{Success: false, Message: "没发现群组"}, http.StatusNotFound)
 			return
 		}
 		JSONResponse(w, gs, http.StatusOK)
@@ -30,12 +30,12 @@ func (as *Server) Groups(w http.ResponseWriter, r *http.Request) {
 		// Put the request into a group
 		err := json.NewDecoder(r.Body).Decode(&g)
 		if err != nil {
-			JSONResponse(w, models.Response{Success: false, Message: "Invalid JSON structure"}, http.StatusBadRequest)
+			JSONResponse(w, models.Response{Success: false, Message: "无效的JSON结构"}, http.StatusBadRequest)
 			return
 		}
 		_, err = models.GetGroupByName(g.Name, ctx.Get(r, "user_id").(int64))
 		if err != gorm.ErrRecordNotFound {
-			JSONResponse(w, models.Response{Success: false, Message: "Group name already in use"}, http.StatusConflict)
+			JSONResponse(w, models.Response{Success: false, Message: "群组在使用中"}, http.StatusConflict)
 			return
 		}
 		g.ModifiedDate = time.Now().UTC()
@@ -70,7 +70,7 @@ func (as *Server) Group(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.ParseInt(vars["id"], 0, 64)
 	g, err := models.GetGroup(id, ctx.Get(r, "user_id").(int64))
 	if err != nil {
-		JSONResponse(w, models.Response{Success: false, Message: "Group not found"}, http.StatusNotFound)
+		JSONResponse(w, models.Response{Success: false, Message: "群组未发现"}, http.StatusNotFound)
 		return
 	}
 	switch {
@@ -79,10 +79,10 @@ func (as *Server) Group(w http.ResponseWriter, r *http.Request) {
 	case r.Method == "DELETE":
 		err = models.DeleteGroup(&g)
 		if err != nil {
-			JSONResponse(w, models.Response{Success: false, Message: "Error deleting group"}, http.StatusInternalServerError)
+			JSONResponse(w, models.Response{Success: false, Message: "删除失败"}, http.StatusInternalServerError)
 			return
 		}
-		JSONResponse(w, models.Response{Success: true, Message: "Group deleted successfully!"}, http.StatusOK)
+		JSONResponse(w, models.Response{Success: true, Message: "删除成功!"}, http.StatusOK)
 	case r.Method == "PUT":
 		// Change this to get from URL and uid (don't bother with id in r.Body)
 		g = models.Group{}
@@ -93,7 +93,7 @@ func (as *Server) Group(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		if g.Id != id {
-			JSONResponse(w, models.Response{Success: false, Message: "Error: /:id and group_id mismatch"}, http.StatusInternalServerError)
+			JSONResponse(w, models.Response{Success: false, Message: "错误: /:id and group_id 不匹配"}, http.StatusInternalServerError)
 			return
 		}
 		g.ModifiedDate = time.Now().UTC()
@@ -115,7 +115,7 @@ func (as *Server) GroupSummary(w http.ResponseWriter, r *http.Request) {
 		id, _ := strconv.ParseInt(vars["id"], 0, 64)
 		g, err := models.GetGroupSummary(id, ctx.Get(r, "user_id").(int64))
 		if err != nil {
-			JSONResponse(w, models.Response{Success: false, Message: "Group not found"}, http.StatusNotFound)
+			JSONResponse(w, models.Response{Success: false, Message: "未发现群组"}, http.StatusNotFound)
 			return
 		}
 		JSONResponse(w, g, http.StatusOK)

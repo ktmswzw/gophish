@@ -24,11 +24,11 @@ import (
 
 // ErrInvalidRequest is thrown when a request with an invalid structure is
 // received
-var ErrInvalidRequest = errors.New("Invalid request")
+var ErrInvalidRequest = errors.New("无效的请求")
 
 // ErrCampaignComplete is thrown when an event is received for a campaign that
 // has already been marked as complete.
-var ErrCampaignComplete = errors.New("Event received on completed campaign")
+var ErrCampaignComplete = errors.New("完成活动时收到的事件")
 
 // TransparencyResponse is the JSON response provided when a third-party
 // makes a request to the transparency handler.
@@ -90,11 +90,11 @@ func (ps *PhishingServer) Start() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		log.Infof("Starting phishing server at https://%s", ps.config.ListenURL)
+		log.Infof("开始服务器在 https://%s", ps.config.ListenURL)
 		log.Fatal(ps.server.ListenAndServeTLS(ps.config.CertPath, ps.config.KeyPath))
 	}
 	// If TLS isn't configured, just listen on HTTP
-	log.Infof("Starting phishing server at http://%s", ps.config.ListenURL)
+	log.Infof("开始服务器已在 at http://%s", ps.config.ListenURL)
 	log.Fatal(ps.server.ListenAndServe())
 }
 

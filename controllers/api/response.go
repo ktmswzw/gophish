@@ -13,7 +13,7 @@ import (
 func JSONResponse(w http.ResponseWriter, d interface{}, c int) {
 	dj, err := json.MarshalIndent(d, "", "  ")
 	if err != nil {
-		http.Error(w, "Error creating JSON response", http.StatusInternalServerError)
+		http.Error(w, "创建JSON响应错误", http.StatusInternalServerError)
 		log.Error(err)
 	}
 	w.Header().Set("Content-Type", "application/json")

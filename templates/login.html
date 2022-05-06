@@ -45,8 +45,8 @@
             <img id="logo" src="/images/logo_purple.png" />
             <h2 class="form-signin-heading">请登入</h2>
             {{template "flashes" .Flashes}}
-            <input type="text" name="username" value="admin" class="form-control top-input" placeholder="帐号" required autofocus>
-            <input type="password" name="password" value="123qwe$R%T" class="form-control bottom-input" placeholder="密码" autocomplete="off" required>
+            <input type="text" name="username" value="" class="form-control top-input" placeholder="帐号" required autofocus>
+            <input type="password" name="password" value="" class="form-control bottom-input" placeholder="密码" autocomplete="off" required>
             <input type="hidden" name="csrf_token" value="{{.Token}}" />
             <button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
         </form>

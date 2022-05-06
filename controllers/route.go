@@ -103,11 +103,11 @@ func (as *AdminServer) Start() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		log.Infof("Starting admin server at https://%s", as.config.ListenURL)
+		log.Infof("服务开始 https://%s", as.config.ListenURL)
 		log.Fatal(as.server.ListenAndServeTLS(as.config.CertPath, as.config.KeyPath))
 	}
 	// If TLS isn't configured, just listen on HTTP
-	log.Infof("Starting admin server at http://%s", as.config.ListenURL)
+	log.Infof("启动服务  http://%s", as.config.ListenURL)
 	log.Fatal(as.server.ListenAndServe())
 }
 
@@ -198,49 +198,49 @@ func newTemplateParams(r *http.Request) templateParams {
 // Base handles the default path and template execution
 func (as *AdminServer) Base(w http.ResponseWriter, r *http.Request) {
 	params := newTemplateParams(r)
-	params.Title = "Dashboard"
+	params.Title = "仪表盘"
 	getTemplate(w, "dashboard").ExecuteTemplate(w, "base", params)
 }
 
 // Campaigns handles the default path and template execution
 func (as *AdminServer) Campaigns(w http.ResponseWriter, r *http.Request) {
 	params := newTemplateParams(r)
-	params.Title = "Campaigns"
+	params.Title = "活动"
 	getTemplate(w, "campaigns").ExecuteTemplate(w, "base", params)
 }
 
 // CampaignID handles the default path and template execution
 func (as *AdminServer) CampaignID(w http.ResponseWriter, r *http.Request) {
 	params := newTemplateParams(r)
-	params.Title = "Campaign Results"
+	params.Title = "活动结果"
 	getTemplate(w, "campaign_results").ExecuteTemplate(w, "base", params)
 }
 
 // Templates handles the default path and template execution
 func (as *AdminServer) Templates(w http.ResponseWriter, r *http.Request) {
 	params := newTemplateParams(r)
-	params.Title = "Email Templates"
+	params.Title = "邮件模版"
 	getTemplate(w, "templates").ExecuteTemplate(w, "base", params)
 }
 
 // Groups handles the default path and template execution
 func (as *AdminServer) Groups(w http.ResponseWriter, r *http.Request) {
 	params := newTemplateParams(r)
-	params.Title = "Users & Groups"
+	params.Title = "帐号 & 群组"
 	getTemplate(w, "groups").ExecuteTemplate(w, "base", params)
 }
 
 // LandingPages handles the default path and template execution
 func (as *AdminServer) LandingPages(w http.ResponseWriter, r *http.Request) {
 	params := newTemplateParams(r)
-	params.Title = "Landing Pages"
+	params.Title = "引导页面"
 	getTemplate(w, "landing_pages").ExecuteTemplate(w, "base", params)
 }
 
 // SendingProfiles handles the default path and template execution
 func (as *AdminServer) SendingProfiles(w http.ResponseWriter, r *http.Request) {
 	params := newTemplateParams(r)
-	params.Title = "Sending Profiles"
+	params.Title = "发送信息"
 	getTemplate(w, "sending_profiles").ExecuteTemplate(w, "base", params)
 }
 
@@ -260,7 +260,7 @@ func (as *AdminServer) Settings(w http.ResponseWriter, r *http.Request) {
 		confirmPassword := r.FormValue("confirm_new_password")
 		// Check the current password
 		err := auth.ValidatePassword(currentPw, u.Hash)
-		msg := models.Response{Success: true, Message: "Settings Updated Successfully"}
+		msg := models.Response{Success: true, Message: "更新设置成功"}
 		if err != nil {
 			msg.Message = err.Error()
 			msg.Success = false
@@ -377,18 +377,18 @@ func (as *AdminServer) Login(w http.ResponseWriter, r *http.Request) {
 		u, err := models.GetUserByUsername(username)
 		if err != nil {
 			log.Error(err)
-			as.handleInvalidLogin(w, r, "Invalid Username/Password")
+			as.handleInvalidLogin(w, r, "错误的帐号或密码")
 			return
 		}
 		// Validate the user's password
 		err = auth.ValidatePassword(password, u.Hash)
 		if err != nil {
 			log.Error(err)
-			as.handleInvalidLogin(w, r, "Invalid Username/Password")
+			as.handleInvalidLogin(w, r, "错误的帐号或密码")
 			return
 		}
 		if u.AccountLocked {
-			as.handleInvalidLogin(w, r, "Account Locked")
+			as.handleInvalidLogin(w, r, "帐号已锁点")
 			return
 		}
 		u.LastLogin = time.Now().UTC()
@@ -407,7 +407,7 @@ func (as *AdminServer) Login(w http.ResponseWriter, r *http.Request) {
 func (as *AdminServer) Logout(w http.ResponseWriter, r *http.Request) {
 	session := ctx.Get(r, "session").(*sessions.Session)
 	delete(session.Values, "id")
-	Flash(w, r, "success", "You have successfully logged out")
+	Flash(w, r, "success", "登出成功")
 	session.Save(r, w)
 	http.Redirect(w, r, "/login", http.StatusFound)
 }
@@ -428,7 +428,7 @@ func (as *AdminServer) ResetPassword(w http.ResponseWriter, r *http.Request) {
 	u := ctx.Get(r, "user").(models.User)
 	session := ctx.Get(r, "session").(*sessions.Session)
 	if !u.PasswordChangeRequired {
-		Flash(w, r, "info", "Please reset your password through the settings page")
+		Flash(w, r, "info", "请重置你的密码")
 		session.Save(r, w)
 		http.Redirect(w, r, "/settings", http.StatusTemporaryRedirect)
 		return

@@ -19,12 +19,12 @@ func (as *Server) SendTestEmail(w http.ResponseWriter, r *http.Request) {
 		UserId:    ctx.Get(r, "user_id").(int64),
 	}
 	if r.Method != "POST" {
-		JSONResponse(w, models.Response{Success: false, Message: "Method not allowed"}, http.StatusBadRequest)
+		JSONResponse(w, models.Response{Success: false, Message: "方法不允许"}, http.StatusBadRequest)
 		return
 	}
 	err := json.NewDecoder(r.Body).Decode(s)
 	if err != nil {
-		JSONResponse(w, models.Response{Success: false, Message: "Error decoding JSON Request"}, http.StatusBadRequest)
+		JSONResponse(w, models.Response{Success: false, Message: "JSON解码错误"}, http.StatusBadRequest)
 		return
 	}
 
@@ -33,12 +33,11 @@ func (as *Server) SendTestEmail(w http.ResponseWriter, r *http.Request) {
 	// If a Template is not specified use a default
 	if s.Template.Name == "" {
 		//default message body
-		text := "It works!\n\nThis is an email letting you know that your gophish\nconfiguration was successful.\n" +
-			"Here are the details:\n\nWho you sent from: {{.From}}\n\nWho you sent to: \n" +
+		text := "测试成功!\n\n这个邮件是用于配置验证\n" +
+			"详情:\n\nFrom: {{.From}}\n\nTo: \n" +
 			"{{if .FirstName}} First Name: {{.FirstName}}\n{{end}}" +
 			"{{if .LastName}} Last Name: {{.LastName}}\n{{end}}" +
-			"{{if .Position}} Position: {{.Position}}\n{{end}}" +
-			"\nNow go send some phish!"
+			"{{if .Position}} Position: {{.Position}}\n{{end}}"
 		t := models.Template{
 			Subject: "测试邮件XECODER",
 			Text:    text,
@@ -117,5 +116,5 @@ func (as *Server) SendTestEmail(w http.ResponseWriter, r *http.Request) {
 		JSONResponse(w, models.Response{Success: false, Message: err.Error()}, http.StatusInternalServerError)
 		return
 	}
-	JSONResponse(w, models.Response{Success: true, Message: "Email Sent"}, http.StatusOK)
+	JSONResponse(w, models.Response{Success: true, Message: "邮件已发送"}, http.StatusOK)
 }

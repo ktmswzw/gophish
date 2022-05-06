@@ -112,6 +112,7 @@ const deleteWebhook = (id) => {
         type: "警告",
         animation: false,
         showCancelButton: true,
+        cancelButtonText: "取消",
         confirmButtonText: "删除",
         confirmButtonColor: "#428bca",
         reverseButtons: true,

@@ -27,7 +27,7 @@ func (as *Server) Webhooks(w http.ResponseWriter, r *http.Request) {
 		wh := models.Webhook{}
 		err := json.NewDecoder(r.Body).Decode(&wh)
 		if err != nil {
-			JSONResponse(w, models.Response{Success: false, Message: "Invalid JSON structure"}, http.StatusBadRequest)
+			JSONResponse(w, models.Response{Success: false, Message: "无效的JSON结构"}, http.StatusBadRequest)
 			return
 		}
 		err = models.PostWebhook(&wh)
@@ -45,7 +45,7 @@ func (as *Server) Webhook(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.ParseInt(vars["id"], 0, 64)
 	wh, err := models.GetWebhook(id)
 	if err != nil {
-		JSONResponse(w, models.Response{Success: false, Message: "Webhook not found"}, http.StatusNotFound)
+		JSONResponse(w, models.Response{Success: false, Message: "Webhook未找到"}, http.StatusNotFound)
 		return
 	}
 	switch {
@@ -59,7 +59,7 @@ func (as *Server) Webhook(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		log.Infof("Deleted webhook with id: %d", id)
-		JSONResponse(w, models.Response{Success: true, Message: "Webhook deleted Successfully!"}, http.StatusOK)
+		JSONResponse(w, models.Response{Success: true, Message: "Webhook成功删除!"}, http.StatusOK)
 
 	case r.Method == "PUT":
 		wh = models.Webhook{}
