@@ -21,7 +21,7 @@ const save = (id) => {
         user.id = id
         api.userId.put(user)
             .success((data) => {
-                successFlash("User " + escapeHtml(user.username) + " updated successfully!")
+                successFlash("User " + escapeHtml(user.username) + " 更新成功!")
                 load()
                 dismiss()
                 $("#modal").modal('hide')
@@ -34,7 +34,7 @@ const save = (id) => {
         // to /user
         api.users.post(user)
             .success((data) => {
-                successFlash("User " + escapeHtml(user.username) + " registered successfully!")
+                successFlash("User " + escapeHtml(user.username) + " 注册成功!")
                 load()
                 dismiss()
                 $("#modal").modal('hide')
@@ -73,7 +73,7 @@ const edit = (id) => {
                 $("#account_locked_checkbox").prop('checked', user.account_locked)
             })
             .error(function () {
-                errorFlash("Error fetching user")
+                errorFlash("获取帐号信息错误")
             })
     }
 }
@@ -85,11 +85,11 @@ const deleteUser = (id) => {
     }
     Swal.fire({
         title: "您确认？",
-        text: "This will delete the account for " + escapeHtml(user.username) + " as well as all of the objects they have created.\n\nThis can't be undone!",
+        text: "删除帐号 " + escapeHtml(user.username) + " 以及所有其创建的内容.\n\n不可撤销!",
         type: "警告",
         animation: false,
         showCancelButton: true,
-        confirmButtonText: "Delete",
+        confirmButtonText: "删除",
         confirmButtonColor: "#428bca",
         reverseButtons: true,
         allowOutsideClick: false,
@@ -110,8 +110,8 @@ const deleteUser = (id) => {
     }).then(function (result) {
         if (result.value){
             Swal.fire(
-                'User Deleted!',
-                "The user account for " + escapeHtml(user.username) + " and all associated objects have been deleted!",
+                '帐号删除!',
+                "帐号 " + escapeHtml(user.username) + " 及所有数据已被删除!",
                 '成功'
             );
         }
@@ -128,11 +128,11 @@ const impersonate = (id) => {
     }
     Swal.fire({
         title: "您确认？",
-        html: "You will be logged out of your account and logged in as <strong>" + escapeHtml(user.username) + "</strong>",
+        html: "将登出帐号 <strong>" + escapeHtml(user.username) + "</strong>",
         type: "警告",
         animation: false,
         showCancelButton: true,
-        confirmButtonText: "Swap User",
+        confirmButtonText: "切换帐号",
         confirmButtonColor: "#428bca",
         reverseButtons: true,
         allowOutsideClick: false,
@@ -148,8 +148,8 @@ const impersonate = (id) => {
           }).then((response) => {
                 if (response.status == 200) {
                     Swal.fire({
-                        title: "Success!",
-                        html: "Successfully changed to user <strong>" + escapeHtml(user.username) + "</strong>.",
+                        title: "成功!",
+                        html: "成功切换帐号 <strong>" + escapeHtml(user.username) + "</strong>.",
                         type: "success",
                         showCancelButton: false,
                         confirmButtonText: "Home",
@@ -160,7 +160,7 @@ const impersonate = (id) => {
                         }});
                 } else {
                     Swal.fire({
-                        title: "Error!",
+                        title: "错误!",
                         type: "error",
                         html: "Failed to change to user <strong>" + escapeHtml(user.username) + "</strong>.",
                         showCancelButton: false,
@@ -190,7 +190,7 @@ const load = () => {
             userRows = []
             $.each(users, (i, user) => {
                 lastlogin = "Never"
-                if (user.last_login != "0001-01-01T00:00:00Z") {
+                if (user.last_login !== "0001-01-01T00:00:00Z") {
                     lastlogin = moment(user.last_login).format('YYYY-MM-DD, h:mm:ss a')
                 }
                 userRows.push([
@@ -212,7 +212,7 @@ const load = () => {
             userTable.rows.add(userRows).draw();
         })
         .error(() => {
-            errorFlash("Error fetching users")
+            errorFlash("获取帐号失败")
         })
 }
 

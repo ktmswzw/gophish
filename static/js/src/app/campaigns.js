@@ -7,6 +7,13 @@ var labels = {
     "Emails Sent": "label-success",
     "Error": "label-danger"
 }
+var texts = {
+    "In progress": "进行中",
+    "Queued": "排队",
+    "Completed": "完成",
+    "Emails Sent": "发送数",
+    "Error": "错误"
+}
 
 var campaigns = []
 var campaign = {}
@@ -367,7 +374,6 @@ $(document).ready(function () {
                 }
                 $.each(campaigns, function (i, campaign) {
                     label = labels[campaign.status] || "label-default";
-
                     //section for tooltips on the status of a campaign to show some quick stats
                     var launchDate;
                     if (moment(campaign.launch_date).isAfter(moment())) {
@@ -382,14 +388,14 @@ $(document).ready(function () {
                         escapeHtml(campaign.name),
                         moment(campaign.created_date).format('YYYY-MM-DD, h:mm:ss a'),
                         moment(campaign.launch_date).format('YYYY-MM-DD, h:mm:ss a'),
-                        "<span class=\"label " + label + "\" data-toggle=\"tooltip\" data-placement=\"right\" data-html=\"true\" title=\"" + quickStats + "\">" + campaign.status + "</span>",
-                        "<div class='pull-right'><a class='btn btn-primary' href='/campaigns/" + campaign.id + "' data-toggle='tooltip' data-placement='left' title='View Results'>\
+                        "<span class=\"label " + label + "\" data-toggle=\"tooltip\" data-placement=\"right\" data-html=\"true\" title=\"" + quickStats + "\">" + texts[campaign.status] + "</span>",
+                        "<div class='pull-right'><a class='btn btn-primary' href='/campaigns/" + campaign.id + "' data-toggle='tooltip' data-placement='left' title='查看结果'>\
                     <i class='fa fa-bar-chart'></i>\
                     </a>\
-            <span data-toggle='modal' data-backdrop='static' data-target='#modal'><button class='btn btn-primary' data-toggle='tooltip' data-placement='left' title='Copy Campaign' onclick='copy(" + i + ")'>\
+            <span data-toggle='modal' data-backdrop='static' data-target='#modal'><button class='btn btn-primary' data-toggle='tooltip' data-placement='left' title='复制活动' onclick='copy(" + i + ")'>\
                     <i class='fa fa-copy'></i>\
                     </button></span>\
-                    <button class='btn btn-danger' onclick='deleteCampaign(" + i + ")' data-toggle='tooltip' data-placement='left' title='Delete Campaign'>\
+                    <button class='btn btn-danger' onclick='deleteCampaign(" + i + ")' data-toggle='tooltip' data-placement='left' title='删除活动'>\
                     <i class='fa fa-trash-o'></i>\
                     </button></div>"
                     ]
@@ -408,7 +414,7 @@ $(document).ready(function () {
         })
         .error(function () {
             $("#loading").hide()
-            errorFlash("Error fetching campaigns")
+            errorFlash("获取活动失败")
         })
     // Select2 Defaults
     $.fn.select2.defaults.set("width", "100%");

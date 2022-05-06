@@ -347,13 +347,12 @@ $(document).ready(function () {
                     var label = statuses[campaign.status].label || "label-default";
                     //section for tooltips on the status of a campaign to show some quick stats
                     var launchDate;
-                    console.log(statuses[campaign.status].text)
                     if (moment(campaign.launch_date).isAfter(moment())) {
-                        launchDate = "预定开始于: " + moment(campaign.launch_date).format('YYYY-MM-DD, h:mm:ss a')
-                        var quickStats = launchDate + "<br><br>" + "Number of recipients: " + campaign.stats.total
+                        launchDate = "计划开始于: " + moment(campaign.launch_date).format('YYYY-MM-DD, h:mm:ss a')
+                        var quickStats = launchDate + "<br><br>" + "收件人数: " + campaign.stats.total
                     } else {
-                        launchDate = "开始日期时间: " + moment(campaign.launch_date).format('YYYY-MM-DD, h:mm:ss a')
-                        var quickStats = launchDate + "<br><br>" + "Number of recipients: " + campaign.stats.total + "<br><br>" + "Emails opened: " + campaign.stats.opened + "<br><br>" + "Emails clicked: " + campaign.stats.clicked + "<br><br>" + "Submitted Credentials: " + campaign.stats.submitted_data + "<br><br>" + "Errors : " + campaign.stats.error + "<br><br>" + "Reported : " + campaign.stats.email_reported
+                        launchDate = "开始时间: " + moment(campaign.launch_date).format('YYYY-MM-DD, h:mm:ss a')
+                        var quickStats = launchDate + "\r\n" + "收件人数: " + campaign.stats.total + "\r\n" + "邮件被打开: " + campaign.stats.opened + "\r\n" + "点击: " + campaign.stats.clicked + "\r\n" + "提交的凭证: " + campaign.stats.submitted_data + "\r\n" + "错误数 : " + campaign.stats.error + "\r\n" + "报告反馈 : " + campaign.stats.email_reported
                     }
                     // Add it to the list
                     campaignRows.push([

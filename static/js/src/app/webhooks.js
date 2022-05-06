@@ -22,7 +22,7 @@ const saveWebhook = (id) => {
                 dismiss();
                 load();
                 $("#modal").modal("hide");
-                successFlash(`Webhook "${escapeHtml(wh.name)}" has been updated successfully!`);
+                successFlash(`网页钩子 "${escapeHtml(wh.name)}" 被删除成功!`);
             })
             .error(function(data) {
                 modalError(data.responseJSON.message)
@@ -33,7 +33,7 @@ const saveWebhook = (id) => {
                 load();
                 dismiss();
                 $("#modal").modal("hide");
-                successFlash(`Webhook "${escapeHtml(wh.name)}" has been created successfully!`);
+                successFlash(`网页钩子 "${escapeHtml(wh.name)}" 创建成功!`);
             })
             .error(function(data) {
                 modalError(data.responseJSON.message)
@@ -65,7 +65,7 @@ const load = () => {
                     `
                       <div class="pull-right">
                         <button class="btn btn-primary ping_button" data-webhook-id="${webhook.id}">
-                          Ping
+                          PING
                         </button>
                         <button class="btn btn-primary edit_button" data-toggle="modal" data-backdrop="static" data-target="#modal" data-webhook-id="${webhook.id}">
                           <i class="fa fa-pencil"></i>
@@ -79,7 +79,7 @@ const load = () => {
             })
         })
         .error(() => {
-            errorFlash("Error fetching webhooks")
+            errorFlash("获取网页钩子失败")
         })
 };
 
@@ -96,7 +96,7 @@ const editWebhook = (id) => {
               $("#is_active").prop("checked", wh.is_active);
           })
           .error(function () {
-              errorFlash("Error fetching webhook")
+              errorFlash("获取网页钩子失败")
           });
     }
 };
@@ -108,11 +108,11 @@ const deleteWebhook = (id) => {
     }
     Swal.fire({
         title: "您确认？",
-        text: `This will delete the webhook '${escapeHtml(wh.name)}'`,
+        text: `将要删除 '${escapeHtml(wh.name)}'`,
         type: "警告",
         animation: false,
         showCancelButton: true,
-        confirmButtonText: "Delete",
+        confirmButtonText: "删除",
         confirmButtonColor: "#428bca",
         reverseButtons: true,
         allowOutsideClick: false,
@@ -133,8 +133,8 @@ const deleteWebhook = (id) => {
     }).then(function(result) {
         if (result.value) {
             Swal.fire(
-                "Webhook Deleted!",
-                `The webhook has been deleted!`,
+                "网页钩子删除!",
+                `已被删除!`,
                 "success"
             );
         }
@@ -150,7 +150,7 @@ const pingUrl = (btn, whId) => {
     api.webhookId.ping(whId)
         .success(function(wh) {
             btn.disabled = false;
-            successFlash(`Ping of "${escapeHtml(wh.name)}" webhook succeeded.`);
+            successFlash(`Ping : "${escapeHtml(wh.name)}" 网页钩子成功.`);
         })
         .error(function(data) {
             btn.disabled = false;
@@ -158,7 +158,7 @@ const pingUrl = (btn, whId) => {
             if (!wh) {
                 return
             }
-            errorFlash(`Ping of "${escapeHtml(wh.name)}" webhook failed: "${escapeHtml(data.responseJSON.message)}"`)
+            errorFlash(`Ping : "${escapeHtml(wh.name)}" 网页钩子失败: "${escapeHtml(data.responseJSON.message)}"`)
         });
 };
 

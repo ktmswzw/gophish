@@ -87,18 +87,18 @@
             <div class="modal-body" id="modal_body">
                 <div class="row" id="modal.flashes"></div>
                 <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" class="form-control" id="name" placeholder="Campaign name" autofocus>
-                    <label class="control-label" for="template">Email Template:</label>
-                    <select class="form-control" placeholder="Template Name" id="template" />
+                    <label for="name">名称:</label>
+                    <input type="text" class="form-control" id="name" placeholder="活动名称" autofocus>
+                    <label class="control-label" for="template">邮件模版:</label>
+                    <select class="form-control" placeholder="邮件模版" id="template" />
                     <option></option>
                     </select>
-                    <label class="control-label" for="page">Landing Page:</label>
-                    <select class="form-control" placeholder="Landing Page" id="page" />
+                    <label class="control-label" for="page">引导网页:</label>
+                    <select class="form-control" placeholder="引导网页" id="page" />
                     <option></option>
                     </select>
-                    <label class="control-label" for="url">URL:
-                        <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Location of Gophish listener (must be reachable by targets!)"></i>
+                    <label class="control-label" for="url">监听URL:
+                        <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="本地监听链接 (必须可以被邮件接受人访问到到外网地址!)"></i>
                     </label>
                     <input type="text" class="form-control" placeholder="http://192.168.1.1" id="url" />
                     <div class="row">
@@ -124,12 +124,12 @@
                                 <i class="fa fa-envelope"></i> 发送测试邮件</button>
                         </span>
                     </div>
-                    <label class="control-label" for="users">组:</label>
+                    <label class="control-label" for="users">接受组:</label>
                     <select class="form-control" id="users" multiple="multiple"></select>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="dismiss()">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="dismiss()">关闭</button>
                 <button type="button" id="launchButton" class="btn btn-primary" onclick="launch()">
                     <i class="fa fa-rocket"></i> 实施活动</button>
             </div>

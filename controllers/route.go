@@ -289,7 +289,7 @@ func (as *AdminServer) Settings(w http.ResponseWriter, r *http.Request) {
 // and management of user accounts within Gophish.
 func (as *AdminServer) UserManagement(w http.ResponseWriter, r *http.Request) {
 	params := newTemplateParams(r)
-	params.Title = "User Management"
+	params.Title = "帐号管理"
 	getTemplate(w, "users").ExecuteTemplate(w, "base", params)
 }
 
@@ -329,7 +329,7 @@ func (as *AdminServer) handleInvalidLogin(w http.ResponseWriter, r *http.Request
 // Webhooks is an admin-only handler that handles webhooks
 func (as *AdminServer) Webhooks(w http.ResponseWriter, r *http.Request) {
 	params := newTemplateParams(r)
-	params.Title = "Webhooks"
+	params.Title = "网页钩子"
 	getTemplate(w, "webhooks").ExecuteTemplate(w, "base", params)
 }
 

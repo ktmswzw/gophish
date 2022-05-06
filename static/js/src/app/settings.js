@@ -38,35 +38,35 @@ $(document).ready(function () {
         imapSettings.restrict_domain = $("#restrictdomain").val()
         imapSettings.ignore_cert_errors = $('#ignorecerterrors').prop('checked')
         imapSettings.delete_reported_campaign_email = $('#deletecampaign').prop('checked')
-        
+
         //To avoid unmarshalling error in controllers/api/imap.go. It would fail gracefully, but with a generic error.
-        if (imapSettings.host == ""){
-            errorFlash("No IMAP Host specified")
+        if (imapSettings.host === ""){
+            errorFlash("没有提供 IMAP Host")
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
             return false
         }
-        if (imapSettings.port == ""){
-            errorFlash("No IMAP Port specified")
+        if (imapSettings.port === ""){
+            errorFlash("没有提供 IMAP Port")
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
             return false
         }
-        if (isNaN(imapSettings.port) || imapSettings.port <1 || imapSettings.port > 65535  ){ 
-            errorFlash("Invalid IMAP Port")
+        if (isNaN(imapSettings.port) || imapSettings.port <1 || imapSettings.port > 65535  ){
+            errorFlash("错误 IMAP Port")
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
             return false
         }
-        if (imapSettings.imap_freq == ""){
+        if (imapSettings.imap_freq === ""){
             imapSettings.imap_freq = "60"
         }
 
         api.IMAP.post(imapSettings).done(function (data) {
-                if (data.success == true) {
-                    successFlashFade("Successfully updated IMAP settings.", 2)
+                if (data.success === true) {
+                    successFlashFade("成功更新IMAP设置.", 2)
                 } else {
-                    errorFlash("Unable to update IMAP settings.")
+                    errorFlash("不能更新 IMAP 设置.")
                 }
             })
             .success(function (data){
@@ -79,7 +79,7 @@ $(document).ready(function () {
                 document.body.scrollTop = 0;
                 document.documentElement.scrollTop = 0;
             })
-        
+
         return false
     })
 
@@ -94,21 +94,21 @@ $(document).ready(function () {
         server.tls = $('#use_tls').prop('checked')
         server.ignore_cert_errors = $('#ignorecerterrors').prop('checked')
 
-        //To avoid unmarshalling error in controllers/api/imap.go. It would fail gracefully, but with a generic error. 
-        if (server.host == ""){
-            errorFlash("No IMAP Host specified")
+        //To avoid unmarshalling error in controllers/api/imap.go. It would fail gracefully, but with a generic error.
+        if (server.host === ""){
+            errorFlash("没有提供IMAP Host")
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
             return false
         }
-        if (server.port == ""){
-            errorFlash("No IMAP Port specified")
+        if (server.port === ""){
+            errorFlash("没有提供IMAP 端口")
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
             return false
         }
         if (isNaN(server.port) || server.port <1 || server.port > 65535  ){
-            errorFlash("Invalid IMAP Port")
+            errorFlash("错误的 IMAP 端口")
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
             return false
@@ -128,41 +128,41 @@ $(document).ready(function () {
         $('#deletecampaign').attr("disabled", true);
         $('#lastlogin').attr("disabled", true);
         $('#imapfreq').attr("disabled", true);
-        $("#validateimap").attr("disabled", true);  
-        $("#validateimap").html("<i class='fa fa-circle-o-notch fa-spin'></i> Testing...");
-        
+        $("#validateimap").attr("disabled", true);
+        $("#validateimap").html("<i class='fa fa-circle-o-notch fa-spin'></i> 测试中...");
+
         api.IMAP.validate(server).done(function(data) {
-            if (data.success == true) {
+            if (data.success === true) {
                 Swal.fire({
-                    title: "Success",
+                    title: "成功",
                     html: "Logged into <b>" + escapeHtml($("#imaphost").val()) + "</b>",
                     type: "success",
                 })
             } else {
                 Swal.fire({
-                    title: "Failed!",
+                    title: "失败!",
                     html: "Unable to login to <b>" + escapeHtml($("#imaphost").val()) + "</b>.",
                     type: "error",
                     showCancelButton: true,
-                    cancelButtonText: "Close",
-                    confirmButtonText: "More Info",
+                    cancelButtonText: "关闭",
+                    confirmButtonText: "更多信息",
                     confirmButtonColor: "#428bca",
                     allowOutsideClick: false,
                 }).then(function(result) {
                     if (result.value) {
                         Swal.fire({
-                            title: "Error:",
+                            title: "错误:",
                             text: data.message,
                         })
                     }
                   })
             }
-            
+
           })
           .fail(function() {
             Swal.fire({
-                title: "Failed!",
-                text: "An unecpected error occured.",
+                title: "失败!",
+                text: "未知异常.",
                 type: "error",
             })
           })
@@ -220,11 +220,11 @@ $(document).ready(function () {
                 $('#lastloginraw').val(imap.last_login)
                 $('#lastlogin').val(moment.utc(imap.last_login).fromNow())
                 $('#imapfreq').val(imap.imap_freq)
-            }  
+            }
 
         })
         .error(function () {
-            errorFlash("Error fetching IMAP settings")
+            errorFlash("无法提供IMAP设置")
         })
     }
 

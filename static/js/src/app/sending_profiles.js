@@ -63,7 +63,7 @@ function save(idx) {
         profile.id = profiles[idx].id
         api.SMTPId.put(profile)
             .success(function (data) {
-                successFlash("Profile edited successfully!")
+                successFlash("更新成功!")
                 load()
                 dismiss()
             })
@@ -74,7 +74,7 @@ function save(idx) {
         // Submit the profile
         api.SMTP.post(profile)
             .success(function (data) {
-                successFlash("Profile added successfully!")
+                successFlash("添加成功!")
                 load()
                 dismiss()
             })
@@ -106,7 +106,7 @@ var dismissSendTestEmailModal = function () {
 var deleteProfile = function (idx) {
     Swal.fire({
         title: "您确认？",
-        text: "This will delete the sending profile. This can't be undone!",
+        text: "操作不可撤销!",
         type: "警告",
         animation: false,
         showCancelButton: true,
@@ -128,8 +128,8 @@ var deleteProfile = function (idx) {
     }).then(function (result) {
         if (result.value){
             Swal.fire(
-                'Sending Profile Deleted!',
-                'This sending profile has been deleted!',
+                '删除配置!',
+                '配置已经被删除!',
                 '成功'
             );
         }
@@ -173,7 +173,7 @@ function copy(idx) {
     })
     var profile = {}
     profile = profiles[idx]
-    $("#name").val("Copy of " + profile.name)
+    $("#name").val("复制 " + profile.name)
     $("#interface_type").val(profile.interface_type)
     $("#from").val(profile.from_address)
     $("#host").val(profile.host)
@@ -206,13 +206,13 @@ function load() {
                         escapeHtml(profile.name),
                         profile.interface_type,
                         moment(profile.modified_date).format('YYYY-MM-DD, h:mm:ss a'),
-                        "<div class='pull-right'><span data-toggle='modal' data-backdrop='static' data-target='#modal'><button class='btn btn-primary' data-toggle='tooltip' data-placement='left' title='Edit Profile' onclick='edit(" + i + ")'>\
+                        "<div class='pull-right'><span data-toggle='modal' data-backdrop='static' data-target='#modal'><button class='btn btn-primary' data-toggle='tooltip' data-placement='left' title='编辑配置' onclick='edit(" + i + ")'>\
                     <i class='fa fa-pencil'></i>\
                     </button></span>\
-		    <span data-toggle='modal' data-target='#modal'><button class='btn btn-primary' data-toggle='tooltip' data-placement='left' title='Copy Profile' onclick='copy(" + i + ")'>\
+		    <span data-toggle='modal' data-target='#modal'><button class='btn btn-primary' data-toggle='tooltip' data-placement='left' title='复制配置' onclick='copy(" + i + ")'>\
                     <i class='fa fa-copy'></i>\
                     </button></span>\
-                    <button class='btn btn-danger' data-toggle='tooltip' data-placement='left' title='Delete Profile' onclick='deleteProfile(" + i + ")'>\
+                    <button class='btn btn-danger' data-toggle='tooltip' data-placement='left' title='删除配置' onclick='deleteProfile(" + i + ")'>\
                     <i class='fa fa-trash-o'></i>\
                     </button></div>"
                     ])

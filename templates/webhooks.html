@@ -7,7 +7,7 @@
     <div class="row">
         <button type="button" class="btn btn-primary" id="new_button" data-toggle="modal" data-backdrop="static"
             data-webhook-id="-1" data-target="#modal">
-            <i class="fa fa-plus"></i> New Webhook</button>
+            <i class="fa fa-plus"></i> 新网页钩子</button>
     </div>
     &nbsp;
     <div id="loading">
@@ -17,9 +17,9 @@
         <table id="webhookTable" class="table" style="display:none;">
             <thead>
                 <tr>
-                    <th class="col-md-2 no-sort">Title</th>
-                    <th class="col-md-2 no-sort">Url</th>
-                    <th class="col-md-2 no-">Is active</th>
+                    <th class="col-md-2 no-sort">标题</th>
+                    <th class="col-md-2 no-sort">URL路径</th>
+                    <th class="col-md-2 no-">激活状态</th>
                     <th class="col-md-2 no-sort"></th>
                 </tr>
             </thead>
@@ -37,16 +37,16 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="groupModalLabel">Add or Edit Webhook</h4>
+                <h4 class="modal-title" id="groupModalLabel">添加或编辑</h4>
             </div>
             <div class="modal-body" id="modal_body">
                 <div class="row" id="modal.flashes"></div>
-                <label class="control-label" for="title">Name:</label>
+                <label class="control-label" for="title">名称:</label>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Name" id="name" required autofocus />
+                    <input type="text" class="form-control" placeholder="名称" id="name" required autofocus />
                 </div>
 
-                <label class="control-label" for="url">URL:</label>
+                <label class="control-label" for="url">URL路径:</label>
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="https://example.com/webhook1" id="url" required />
                 </div>
@@ -59,14 +59,14 @@
                 <div class="checkbox checkbox-primary">
                     <input type="checkbox" id="is_active" value="true" />
                     <label for="is_active">Is active <i class="fa fa-question-circle"
-                            data-toggle="tooltip" data-placement="right" 
-                            title="Data is sent only to the active webhooks"></i>
+                            data-toggle="tooltip" data-placement="right"
+                            title="数据只发送给活动的webhook"></i>
                     </label>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="modalSubmit">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="modalSubmit">保存变化</button>
             </div>
         </div>
     </div>

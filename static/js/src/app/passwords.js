@@ -4,27 +4,27 @@ const StrengthMapping = {
     0: {
         class: 'danger',
         width: '10%',
-        status: 'Very Weak'
+        status: '极度脆弱'
     },
     1: {
         class: 'danger',
         width: '25%',
-        status: 'Very Weak'
+        status: '非常脆弱'
     },
     2: {
         class: 'warning',
         width: '50%',
-        status: 'Weak'
+        status: '脆弱'
     },
     3: {
         class: 'success',
         width: '75%',
-        status: 'Good'
+        status: '好'
     },
     4: {
         class: 'success',
         width: '100%',
-        status: 'Very Good'
+        status: '非常好'
     }
 }
 
