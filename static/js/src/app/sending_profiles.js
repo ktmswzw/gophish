@@ -131,7 +131,7 @@ var deleteProfile = function (idx) {
             Swal.fire(
                 '删除配置!',
                 '配置已经被删除!',
-                '成功'
+                'success'
             );
         }
         $('button:contains("OK")').on('click', function () {

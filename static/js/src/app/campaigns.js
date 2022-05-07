@@ -79,7 +79,7 @@ function launch() {
             Swal.fire(
                 'Campaign Scheduled!',
                 'This campaign has been scheduled for launch!',
-                '成功'
+                'success'
             );
         }
         $('button:contains("OK")').on('click', function () {
@@ -161,7 +161,7 @@ function deleteCampaign(idx) {
             Swal.fire(
                 'Campaign Deleted!',
                 'This campaign has been deleted!',
-                '成功'
+                'success'
             );
         }
         $('button:contains("OK")').on('click', function () {
@@ -185,7 +185,7 @@ function setupOptions() {
                 });
                 console.log(group_s2)
                 $("#users.form-control").select2({
-                    placeholder: "Select Groups",
+                    placeholder: "选择群组",
                     data: group_s2,
                 });
             }
@@ -202,7 +202,7 @@ function setupOptions() {
                 });
                 var template_select = $("#template.form-control")
                 template_select.select2({
-                    placeholder: "Select a Template",
+                    placeholder: "选择一个模版",
                     data: template_s2,
                 });
                 if (templates.length === 1) {
@@ -223,7 +223,7 @@ function setupOptions() {
                 });
                 var page_select = $("#page.form-control")
                 page_select.select2({
-                    placeholder: "Select a Landing Page",
+                    placeholder: "选择一个引导页面",
                     data: page_s2,
                 });
                 if (pages.length === 1) {
@@ -244,7 +244,7 @@ function setupOptions() {
                 });
                 var profile_select = $("#profile.form-control")
                 profile_select.select2({
-                    placeholder: "Select a Sending Profile",
+                    placeholder: "选择发送配置",
                     data: profile_s2,
                 }).select2("val", profile_s2[0]);
                 if (profiles.length === 1) {

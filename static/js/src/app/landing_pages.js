@@ -77,7 +77,7 @@ var deletePage = function (idx) {
             Swal.fire(
                 'Landing Page Deleted!',
                 'This landing page has been deleted!',
-                '成功'
+                'success'
             );
         }
         $('button:contains("OK")').on('click', function () {

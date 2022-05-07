@@ -13,46 +13,58 @@
     <title>XECODER - {{ .Title }}</title>
 
     <link href="/css/dist/gophish.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,700' rel='stylesheet'
+          type='text/css'>
 </head>
 
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <img class="navbar-logo" src="/images/logo_inv_small.png" />
-                <a class="navbar-brand" href="/">&nbsp;XECODER </a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a id="login-button" href="/login">
-                            <button type="button" class="btn btn-primary">登入</button>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">&nbsp;XECODER </a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <div id="login-button">
+                        <button type="button" class="btn btn-primary" onclick="send()" >申请测试</button>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
-    <div class="container">
-        <form class="form-signin" action="" method="POST">
-            <img id="logo" src="/images/logo_purple.png" />
-            <h2 class="form-signin-heading">请登入</h2>
-            {{template "flashes" .Flashes}}
-            <input type="text" name="username" value="" class="form-control top-input" placeholder="帐号" required autofocus>
-            <input type="password" name="password" value="" class="form-control bottom-input" placeholder="密码" autocomplete="off" required>
-            <input type="hidden" name="csrf_token" value="{{.Token}}" />
-            <button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
-        </form>
-    </div>
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/js/dist/vendor.min.js"></script>
+</div>
+<div class="container">
+    <form class="form-signin" action="" method="POST">
+        <img id="logo" src="/images/logo_purple.png"/>
+        <h4 class="form-signin-heading">群发及监控测试平台</h4>
+        {{template "flashes" .Flashes}}
+        <input type="text" name="username" value="" class="form-control top-input" placeholder="帐号" required autofocus>
+        <input type="password" name="password" value="" class="form-control bottom-input" placeholder="密码"
+               autocomplete="off" required>
+        <input type="hidden" name="csrf_token" value="{{.Token}}"/>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
+    </form>
+</div>
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="application/javascript">
+    function send(){
+        navigator.clipboard.writeText("ktmswzw@vip.qq.com");
+        window.location.href = 'mailto:ktmswzw@vip.qq.com?subject安全邮件批量发送测试帐号申请&body=你好%0d%0a申请帐号'
+        Swal.fire(
+            '告知!',
+            '发送 标题为 安全邮件批量发送测试帐号申请 到 ktmswzw@vip.qq.com!',
+            'success'
+        );
+    }
+</script>
+<script src="/js/dist/vendor.min.js"></script>
 </body>
 
 </html>

@@ -113,7 +113,7 @@ const deleteUser = (id) => {
             Swal.fire(
                 '帐号删除!',
                 "帐号 " + escapeHtml(user.username) + " 及所有数据已被删除!",
-                '成功'
+                'success'
             );
         }
         $('button:contains("OK")').on('click', function () {

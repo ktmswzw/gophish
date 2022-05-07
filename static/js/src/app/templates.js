@@ -106,7 +106,7 @@ var deleteTemplate = function (idx) {
             Swal.fire(
                 '模版删除!',
                 '模版已经被删除!',
-                '成功'
+                'success'
             );
         }
         $('button:contains("OK")').on('click', function () {

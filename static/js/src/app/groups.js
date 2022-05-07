@@ -175,7 +175,7 @@ var deleteGroup = function (id) {
             Swal.fire(
                 '删除群组!',
                 '已删除群组!',
-                '成功'
+                'success'
             );
         }
         $('button:contains("OK")').on('click', function () {

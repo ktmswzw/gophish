@@ -155,7 +155,7 @@ function deleteCampaign() {
             Swal.fire(
                 '活动删除!',
                 '活动已经被删除!',
-                '成功'
+                'success'
             );
         }
         $('button:contains("OK")').on('click', function () {
@@ -194,7 +194,7 @@ function completeCampaign() {
             Swal.fire(
                 '活动完成!',
                 '完成!',
-                '成功'
+                'success'
             );
             $('#complete_button')[0].disabled = true;
             $('#complete_button').text('完成!')
