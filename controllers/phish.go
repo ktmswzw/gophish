@@ -363,6 +363,7 @@ func setupContext(r *http.Request) (*http.Request, error) {
 		ip = r.RemoteAddr
 	}
 	// Handle post processing such as GeoIP
+	log.Error(" ----ip----   ", ip)
 	err = rs.UpdateGeo(ip)
 	if err != nil {
 		log.Error(err)
