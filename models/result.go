@@ -3,6 +3,7 @@ package models
 import (
 	"crypto/rand"
 	"encoding/json"
+	"fmt"
 	"math/big"
 	"net"
 	"time"
@@ -12,14 +13,56 @@ import (
 	"github.com/oschwald/maxminddb-golang"
 )
 
-type mmLocation struct {
-	GeoPoint mmGeoPoint `maxminddb:"location"`
+type City struct {
+	City struct {
+		GeoNameID uint              `maxminddb:"geoname_id"`
+		Names     map[string]string `maxminddb:"names"`
+	} `maxminddb:"city"`
+	Continent struct {
+		Code      string            `maxminddb:"code"`
+		GeoNameID uint              `maxminddb:"geoname_id"`
+		Names     map[string]string `maxminddb:"names"`
+	} `maxminddb:"continent"`
+	Country struct {
+		GeoNameID         uint              `maxminddb:"geoname_id"`
+		IsInEuropeanUnion bool              `maxminddb:"is_in_european_union"`
+		IsoCode           string            `maxminddb:"iso_code"`
+		Names             map[string]string `maxminddb:"names"`
+	} `maxminddb:"country"`
+	Location struct {
+		AccuracyRadius uint16  `maxminddb:"accuracy_radius"`
+		Latitude       float64 `maxminddb:"latitude"`
+		Longitude      float64 `maxminddb:"longitude"`
+		MetroCode      uint    `maxminddb:"metro_code"`
+		TimeZone       string  `maxminddb:"time_zone"`
+	} `maxminddb:"location"`
+	Postal struct {
+		Code string `maxminddb:"code"`
+	} `maxminddb:"postal"`
+	RegisteredCountry struct {
+		GeoNameID         uint              `maxminddb:"geoname_id"`
+		IsInEuropeanUnion bool              `maxminddb:"is_in_european_union"`
+		IsoCode           string            `maxminddb:"iso_code"`
+		Names             map[string]string `maxminddb:"names"`
+	} `maxminddb:"registered_country"`
+	RepresentedCountry struct {
+		GeoNameID         uint              `maxminddb:"geoname_id"`
+		IsInEuropeanUnion bool              `maxminddb:"is_in_european_union"`
+		IsoCode           string            `maxminddb:"iso_code"`
+		Names             map[string]string `maxminddb:"names"`
+		Type              string            `maxminddb:"type"`
+	} `maxminddb:"represented_country"`
+	Subdivisions []struct {
+		GeoNameID uint              `maxminddb:"geoname_id"`
+		IsoCode   string            `maxminddb:"iso_code"`
+		Names     map[string]string `maxminddb:"names"`
+	} `maxminddb:"subdivisions"`
+	Traits struct {
+		IsAnonymousProxy    bool `maxminddb:"is_anonymous_proxy"`
+		IsSatelliteProvider bool `maxminddb:"is_satellite_provider"`
+	} `maxminddb:"traits"`
 }
 
-type mmGeoPoint struct {
-	Latitude  float64 `maxminddb:"latitude"`
-	Longitude float64 `maxminddb:"longitude"`
-}
 
 // Result contains the fields for a result object,
 // which is a representation of a target in a campaign.
@@ -30,6 +73,9 @@ type Result struct {
 	RId          string    `json:"id"`
 	Status       string    `json:"status" sql:"not null"`
 	IP           string    `json:"ip"`
+	City           string    `json:"city"`
+	Subdivision           string    `json:"subdivision"`
+	Country           string    `json:"country"`
 	Latitude     float64   `json:"latitude"`
 	Longitude    float64   `json:"longitude"`
 	SendDate     time.Time `json:"send_date"`
@@ -150,6 +196,7 @@ func (r *Result) HandleEmailReport(details EventDetails) error {
 // UpdateGeo updates the latitude and longitude of the result in
 // the database given an IP address
 func (r *Result) UpdateGeo(addr string) error {
+	//addr = "36.22.26.180"
 	// Open a connection to the maxmind db
 	mmdb, err := maxminddb.Open("static/db/geolite2-city.mmdb")
 	if err != nil {
@@ -157,16 +204,25 @@ func (r *Result) UpdateGeo(addr string) error {
 	}
 	defer mmdb.Close()
 	ip := net.ParseIP(addr)
-	var location mmLocation
 	// Get the record
-	err = mmdb.Lookup(ip, &location)
+	var record City
+	err = mmdb.Lookup(ip, &record)
+	fmt.Printf("Portuguese (BR) city name: %v\n", record.City.Names["zh-CN"])
+	if len(record.Subdivisions) > 0 {
+		fmt.Printf("English subdivision name: %v\n", record.Subdivisions[0].Names["zh-CN"])
+		r.Subdivision = record.Subdivisions[0].Names["zh-CN"]
+	}
+	fmt.Printf("Country name: %v\n", record.Country.Names["zh-CN"])
+	fmt.Printf("Coordinates: %v, %v\n", record.Location.Latitude, record.Location.Longitude)
 	if err != nil {
 		return err
 	}
 	// Update the database with the record information
 	r.IP = addr
-	r.Latitude = location.GeoPoint.Latitude
-	r.Longitude = location.GeoPoint.Longitude
+	r.Latitude = record.Location.Latitude
+	r.Longitude = record.Location.Longitude
+	r.City = record.City.Names["zh-CN"]
+	r.Country = record.Country.Names["zh-CN"]
 	return db.Save(r).Error
 }
 
