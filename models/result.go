@@ -12,7 +12,7 @@ import (
 	"github.com/oschwald/maxminddb-golang"
 )
 
-type mmCity struct {
+type mmLocation struct {
 	GeoPoint mmGeoPoint `maxminddb:"location"`
 }
 
@@ -157,16 +157,16 @@ func (r *Result) UpdateGeo(addr string) error {
 	}
 	defer mmdb.Close()
 	ip := net.ParseIP(addr)
-	var city mmCity
+	var location mmLocation
 	// Get the record
-	err = mmdb.Lookup(ip, &city)
+	err = mmdb.Lookup(ip, &location)
 	if err != nil {
 		return err
 	}
 	// Update the database with the record information
 	r.IP = addr
-	r.Latitude = city.GeoPoint.Latitude
-	r.Longitude = city.GeoPoint.Longitude
+	r.Latitude = location.GeoPoint.Latitude
+	r.Longitude = location.GeoPoint.Longitude
 	return db.Save(r).Error
 }
 

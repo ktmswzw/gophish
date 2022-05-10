@@ -601,7 +601,7 @@ var updateMap = function (results) {
             bubbles.push({
                 latitude: result.latitude,
                 longitude: result.longitude,
-                name: result.ip,
+                name: result.ip + '-' + result.email,
                 fillKey: "point",
                 radius: 2
             })
@@ -889,11 +889,11 @@ function load() {
                         responsive: true,
                         fills: {
                             defaultFill: "#ffffff",
-                            point: "#283F50"
+                            point: "#c24c1a"
                         },
                         geographyConfig: {
                             highlightFillColor: "#1abc9c",
-                            borderColor: "#283F50"
+                            borderColor: "#aac21a"
                         },
                         bubblesConfig: {
                             borderColor: "#283F50"

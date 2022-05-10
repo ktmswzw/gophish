@@ -1,13 +1,13 @@
 {
 	"admin_server": {
 		"listen_url": "0.0.0.0:8002",
-		"use_tls": true,
+		"use_tls": false,
 		"cert_path": "./cert/xnewshop.com.cer",
 		"key_path": "./cert/xnewshop.com.key"
 	},
 	"phish_server": {
 		"listen_url": "0.0.0.0:8001",
-		"use_tls": true,
+		"use_tls": false,
 		"cert_path": "./cert/xnewshop.com.cer",
 		"key_path": "./cert/xnewshop.com.key"
 	},
