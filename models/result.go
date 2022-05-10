@@ -198,7 +198,7 @@ func (r *Result) HandleEmailReport(details EventDetails) error {
 func (r *Result) UpdateGeo(addr string) error {
 	//addr = "36.22.26.180"
 	// Open a connection to the maxmind db
-	mmdb, err := maxminddb.Open("static/db/geolite2-city.mmdb")
+	mmdb, err := maxminddb.Open("static/db/GeoLite2-City.mmdb")
 	if err != nil {
 		log.Fatal(err)
 	}

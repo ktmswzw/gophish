@@ -137,7 +137,7 @@ function deleteCampaign(idx) {
     Swal.fire({
         title: "您确认？",
         text: "将删除活动，不可撤销!",
-        type: "警告",
+        type: "warning",
         animation: false,
         showCancelButton: true,
         cancelButtonText: "取消",
@@ -175,7 +175,7 @@ function setupOptions() {
         .success(function (summaries) {
             groups = summaries.groups
             if (groups.length === 0) {
-                modalError("No groups found!")
+                modalError("没有群组, 请先建立!")
                 return false;
             } else {
                 var group_s2 = $.map(groups, function (obj) {

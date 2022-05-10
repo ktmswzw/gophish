@@ -86,7 +86,7 @@ const deleteUser = (id) => {
     Swal.fire({
         title: "您确认？",
         text: "删除帐号 " + escapeHtml(user.username) + " 以及所有其创建的内容.\n\n不可撤销!",
-        type: "警告",
+        type: "warning",
         animation: false,
         showCancelButton: true,
         cancelButtonText: "取消",
@@ -130,7 +130,7 @@ const impersonate = (id) => {
     Swal.fire({
         title: "您确认？",
         html: "将登出帐号 <strong>" + escapeHtml(user.username) + "</strong>",
-        type: "警告",
+        type: "warning",
         animation: false,
         showCancelButton: true,
         cancelButtonText: "取消",

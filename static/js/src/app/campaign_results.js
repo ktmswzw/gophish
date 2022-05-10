@@ -130,7 +130,7 @@ function deleteCampaign() {
     Swal.fire({
         title: "您确认？",
         text: "这将删除活动，不可恢复!",
-        type: "警告",
+        type: "warning",
         animation: false,
         showCancelButton: true,
         cancelButtonText: "取消",
@@ -169,7 +169,7 @@ function completeCampaign() {
     Swal.fire({
         title: "您确认？",
         text: "将停止活动所有发送，是否结束",
-        type: "警告",
+        type: "warning",
         animation: false,
         showCancelButton: true,
         cancelButtonText: "取消",
@@ -602,7 +602,7 @@ var updateMap = function (results) {
             bubbles.push({
                 latitude: result.latitude,
                 longitude: result.longitude,
-                name: result.ip +'\r\n'+ result.first_name + ' '+ result.last_name + '('+ result.position + ')\r\n'+ result.city + '\r\n'+ result.email +'\r\n'+ result.city + '\r\n'+ result.subdivision,
+                name: result.ip +'\r\n'+ result.first_name + ' '+ result.last_name + '('+ result.position + ')\r\n' + result.email +'\r\n'+ result.city + '\r\n'+ result.subdivision,
                 fillKey: "point",
                 radius: 2
             })
@@ -620,7 +620,7 @@ function createStatusLabel(status, send_date) {
     var label = statuses[status].label || "label-default";
     var statusColumn = "<span class=\"label " + label + "\">" + status + "</span>"
     // Add the tooltip if the email is scheduled to be sent
-    if (status == "Scheduled" || status == "Retrying") {
+    if (status === "Scheduled" || status === "Retrying") {
         var sendDateMessage = "Scheduled to send at " + send_date
         statusColumn = "<span class=\"label " + label + "\" data-toggle=\"tooltip\" data-placement=\"top\" data-html=\"true\" title=\"" + sendDateMessage + "\">" + status + "</span>"
     }

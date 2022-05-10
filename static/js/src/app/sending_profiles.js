@@ -107,7 +107,7 @@ var deleteProfile = function (idx) {
     Swal.fire({
         title: "您确认？",
         text: "操作不可撤销!",
-        type: "警告",
+        type: "warning",
         animation: false,
         showCancelButton: true,
         cancelButtonText: "取消",

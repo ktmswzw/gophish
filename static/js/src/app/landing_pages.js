@@ -53,7 +53,7 @@ var deletePage = function (idx) {
     Swal.fire({
         title: "您确认？",
         text: "This will delete the landing page. This can't be undone!",
-        type: "警告",
+        type: "warning",
         animation: false,
         showCancelButton: true,
         cancelButtonText: "取消",

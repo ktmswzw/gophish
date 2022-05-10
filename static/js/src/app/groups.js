@@ -151,7 +151,7 @@ var deleteGroup = function (id) {
     Swal.fire({
         title: "您确认?",
         text: "删除群组，不可恢复!",
-        type: "警告",
+        type: "warning",
         animation: false,
         showCancelButton: true,
         cancelButtonText: "取消",
