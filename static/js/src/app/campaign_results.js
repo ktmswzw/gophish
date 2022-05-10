@@ -598,10 +598,11 @@ var updateMap = function (results) {
             }
         })
         if (newIP) {
+            console.log(result)
             bubbles.push({
                 latitude: result.latitude,
                 longitude: result.longitude,
-                name: result.ip + '-' + result.email,
+                name: result.ip +'\r\n'+ result.first_name + ' '+ result.last_name + '('+ result.position + ')\r\n'+ result.city + '\r\n'+ result.email +'\r\n'+ result.city + '\r\n'+ result.subdivision,
                 fillKey: "point",
                 radius: 2
             })
@@ -889,14 +890,14 @@ function load() {
                         responsive: true,
                         fills: {
                             defaultFill: "#ffffff",
-                            point: "#c24c1a"
+                            point: "#aac21a"
                         },
                         geographyConfig: {
                             highlightFillColor: "#1abc9c",
-                            borderColor: "#aac21a"
+                            borderColor: "#283F50"
                         },
                         bubblesConfig: {
-                            borderColor: "#283F50"
+                            borderColor: "#c24c1a"
                         }
                     });
                 }
